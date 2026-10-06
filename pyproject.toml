@@ -1,0 +1,51 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pdbcheck"
+version = "0.1.0"
+description = "Inter-chain steric clash screening for PDB structure files"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{ name = "Lamarck", email = "lmk704021302@gmail.com" }]
+keywords = ["pdb", "protein-structure", "steric-clash", "structural-biology"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff"]
+
+[project.scripts]
+pdbcheck = "pdbcheck.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/LamarckLab/pdbcheck"
+Source = "https://github.com/LamarckLab/pdbcheck"
+Issues = "https://github.com/LamarckLab/pdbcheck/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pdbcheck"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
