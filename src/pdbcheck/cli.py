@@ -7,6 +7,9 @@ import sys
 from pathlib import Path
 
 from pdbcheck import __version__
+from pdbcheck.clash import find_clashes
+from pdbcheck.parser import parse_pdb
+from pdbcheck.report import clean_row, contact_row, error_row, write_csv
 
 OUTPUT_NAME = "pdb_check.csv"
 SUFFIXES = (".pdb", ".PDB")
@@ -41,6 +44,17 @@ def default_output(target: Path) -> Path:
     return (target.parent if target.is_file() else target) / OUTPUT_NAME
 
 
+def rows_for(path: Path) -> list[dict]:
+    """Every CSV row one input file produces. Raises only on an unreadable file."""
+    structure = parse_pdb(path)
+    if not structure.atoms:
+        raise ValueError("no usable atom records")
+    contacts = find_clashes(structure)
+    if not contacts:
+        return [clean_row(path.name)]
+    return [contact_row(path.name, contact) for contact in contacts]
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
 
@@ -56,10 +70,26 @@ def main(argv: list[str] | None = None) -> int:
 
     out = args.out or default_output(args.target)
 
-    # TODO stage 2: parse, detect clashes, write the CSV
+    rows: list[dict] = []
+    failed = 0
+    for path in files:
+        try:
+            rows.extend(rows_for(path))
+        except (OSError, ValueError) as exc:
+            # one unreadable structure must not abandon the rest of the batch
+            print(f"pdbcheck: {path.name}: {exc}", file=sys.stderr)
+            rows.append(error_row(path.name))
+            failed += 1
+
+    write_csv(out, rows)
+
     if not args.quiet:
-        print(f"[stub] {len(files)} file(s) -> {out}")
-    return 0
+        if len(files) == 1:
+            print(f"{files[0].name} analysed  ->  {out}")
+        else:
+            print(f"{len(files)} PDB files processed  ->  {out}")
+
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
