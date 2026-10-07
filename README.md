@@ -1,7 +1,8 @@
 # pdbcheck
 
-Inter-chain steric clash screening for PDB structure files.
+Fast inter-chain steric clash screening for PDB structures.
 
+[![CI](https://github.com/LamarckLab/pdbcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/LamarckLab/pdbcheck/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/pdbcheck)](https://pypi.org/project/pdbcheck/)
 [![Python](https://img.shields.io/pypi/pyversions/pdbcheck)](https://pypi.org/project/pdbcheck/)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/LamarckLab/pdbcheck/blob/main/LICENSE)

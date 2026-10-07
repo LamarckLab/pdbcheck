@@ -1,4 +1,4 @@
-"""Inter-chain steric clash screening for PDB structure files."""
+"""Fast inter-chain steric clash screening for PDB structures."""
 
 from __future__ import annotations
 

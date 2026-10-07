@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pdbcheck"
 version = "0.1.0"
-description = "Inter-chain steric clash screening for PDB structure files"
+description = "Fast inter-chain steric clash screening for PDB structures"
 readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
