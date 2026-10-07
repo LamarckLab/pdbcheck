@@ -3,9 +3,9 @@
 Fast inter-chain steric clash screening for PDB structures.
 
 [![CI](https://github.com/LamarckLab/pdbcheck/actions/workflows/ci.yml/badge.svg)](https://github.com/LamarckLab/pdbcheck/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/pdbcheck)](https://pypi.org/project/pdbcheck/)
-[![Python](https://img.shields.io/pypi/pyversions/pdbcheck)](https://pypi.org/project/pdbcheck/)
-[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/LamarckLab/pdbcheck/blob/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/pdbcheck.svg)](https://pypi.org/project/pdbcheck/)
+[![Python](https://img.shields.io/pypi/pyversions/pdbcheck.svg)](https://pypi.org/project/pdbcheck/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/LamarckLab/pdbcheck/blob/main/LICENSE)
 
 `pdbcheck` reads one PDB file, or a directory of them, and writes a CSV naming every
 pair of atoms from different chains that sit closer together than chemistry allows.
